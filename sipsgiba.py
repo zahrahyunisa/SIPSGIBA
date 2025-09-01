@@ -300,17 +300,17 @@ else:
                     st.subheader("Visualisasi Cluster")
                     fig, ax = plt.subplots(figsize=(10, 6))
                     ax.scatter(X[:, 0], X[:, 1], c=clusters, cmap='viridis', edgecolor='k', alpha=0.7)
-                if "Nama" in df.columns:
-                     for i, txt in enumerate(df["Nama"]):
-                        ax.annotate(txt, (X[i, 0], X[i, 1]), fontsize=8, alpha=0.7)
-                        ax.scatter(initial_centroids[:, 0], initial_centroids[:, 1], c='red', s=200, marker='*', label='Centroid Awal', edgecolor='k')
-                        ax.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], c='blue', s=200, marker='X', label='Centroid Akhir', edgecolor='k')
-                        ax.set_xlabel(selected_columns[0])
-                        ax.set_ylabel(selected_columns[1])
-                        ax.set_title("Visualisasi K-Means Clustering")
-                        ax.legend()
-                        ax.grid(True)
-                        st.pyplot(fig)
+                    if "Nama" in df.columns:
+                        for i, txt in enumerate(df["Nama"]):
+                            ax.annotate(txt, (X[i, 0], X[i, 1]), fontsize=8, alpha=0.7)
+                            ax.scatter(initial_centroids[:, 0], initial_centroids[:, 1], c='red', s=200, marker='*', label='Centroid Awal', edgecolor='k')
+                            ax.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], c='blue', s=200, marker='X', label='Centroid Akhir', edgecolor='k')
+                            ax.set_xlabel(selected_columns[0])
+                            ax.set_ylabel(selected_columns[1])
+                            ax.set_title("Visualisasi K-Means Clustering")
+                            ax.legend()
+                            ax.grid(True)
+                            st.pyplot(fig)
 
         except Exception as e:
             st.error(f"Terjadi error: {str(e)}")
