@@ -187,12 +187,11 @@ else:
                     with st.expander("Berikut ini adalah data dari hasil normalisasi (proses mengubah nilai-nilai data ke skala yang sama)", expanded=True):
                         show_data(st.session_state.df_normalized)
                     
-                    numeric_cols = df.select_dtypes(include=[np.number]).columns.tolist()
-                    info_cols = [col for col in df.columns if col not in numeric_cols]
+                    
                     st.markdown("### Konfigurasi Clustering")
                     selected_columns = st.multiselect(
                             "Pilih kolom numerik untuk clustering",
-                            numeric_cols,
+                            all_cols,
                             placeholder="Silahkan pilih variabel untuk melanjutkan",
                             key="cols_selector"
                         )
