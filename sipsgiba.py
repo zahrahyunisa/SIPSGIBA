@@ -299,14 +299,17 @@ else:
                     st.subheader("Visualisasi Cluster")
                     fig, ax = plt.subplots(figsize=(10, 6))
                     ax.scatter(X[:, 0], X[:, 1], c=clusters, cmap='viridis', edgecolor='k', alpha=0.7)
-                    ax.scatter(initial_centroids[:, 0], initial_centroids[:, 1], c='red', s=200, marker='*', label='Centroid Awal', edgecolor='k')
-                    ax.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], c='blue', s=200, marker='X', label='Centroid Akhir', edgecolor='k')
-                    ax.set_xlabel(selected_columns[0])
-                    ax.set_ylabel(selected_columns[1])
-                    ax.set_title("Visualisasi K-Means Clustering")
-                    ax.legend()
-                    ax.grid(True)
-                    st.pyplot(fig)
+                if "Nama" in df.columns:
+                     for i, txt in enumerate(df["Nama"]):
+                        ax.annotate(txt, (X[i, 0], X[i, 1]), fontsize=8, alpha=0.7)
+                        ax.scatter(initial_centroids[:, 0], initial_centroids[:, 1], c='red', s=200, marker='*', label='Centroid Awal', edgecolor='k')
+                        ax.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], c='blue', s=200, marker='X', label='Centroid Akhir', edgecolor='k')
+                        ax.set_xlabel(selected_columns[0])
+                        ax.set_ylabel(selected_columns[1])
+                        ax.set_title("Visualisasi K-Means Clustering")
+                        ax.legend()
+                        ax.grid(True)
+                        st.pyplot(fig)
 
         except Exception as e:
             st.error(f"Terjadi error: {str(e)}")
@@ -351,6 +354,7 @@ else:
                 df_pca['Cluster'] = df_clustered['Cluster']
                 df_pca['Posyandu'] = df_clustered['Posyandu'] if 'Posyandu' in df_clustered.columns else "Tidak diketahui"
                 df_pca['Cluster'] = df_pca['Cluster'].astype(str)
+                df_pca['Nama'] = df_clustered['Nama'] if 'Nama' in df_clustered.columns else "Tidak diketahui"
                 
                 # Visualisasi utama menggunakan plotly
                 custom_color_map = {'1': '#43AA8B', '2': '#F9C74F'}
@@ -358,7 +362,8 @@ else:
                 fig = px.scatter(
                     df_pca, x="Dim1", y="Dim2",
                     color="Cluster", symbol="Cluster",
-                    hover_name="Posyandu",
+                    hover_name="Nama",
+                    hover_data=["Posyandu"],
                     title="Visualisasi Clustering menggunakan PCA",
                     color_discrete_map=custom_color_map,
                     symbol_map=custom_symbol_map
@@ -579,7 +584,7 @@ else:
             st.session_state.selected_columns and
             st.session_state.selected_data
     ):
-                
+
                 st.warning("Silahkan unggah file terlebih dahulu di menu **Unggah File**.")
                 st.markdown("<hr style='margin-top:50px; margin-bottom:10px;'>", unsafe_allow_html=True)
 
