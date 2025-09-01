@@ -350,7 +350,8 @@ else:
                 X_pca = pca.fit_transform(X)
 
                 # Gabungkan PCA dan cluster ke dataframe
-                df_pca = pd.DataFrame(data=X_pca, columns=['Dim1', 'Dim2'])
+                df_pca = pd.DataFrame(X_pca, columns=['Dim1', 'Dim2'], index=df_clustered.index)
+                df_pca = pd.concat([df_pca, df_clustered[['Cluster', 'Nama', 'Posyandu']]], axis=1)
                 df_pca['Cluster'] = df_clustered['Cluster']
                 df_pca['Cluster'] = df_pca['Cluster'].astype(str)
                 df_pca['Posyandu'] = df_clustered['Posyandu'] if 'Posyandu' in df_clustered.columns else "Tidak diketahui"
