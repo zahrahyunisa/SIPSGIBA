@@ -165,8 +165,6 @@ else:
                 all_cols = df.columns.tolist()
                 exclude_cols = ["no", "nomor", "id"]
                 all_cols = [col for col in all_cols if col.lower() not in exclude_cols]
-                numeric_cols = df.select_dtypes(include=[np.number]).columns.tolist()
-                info_cols = [col for col in df.columns if col not in numeric_cols]
 
                 if not all_cols:
                     st.error("File CSV tidak mengandung kolom numerik.")
@@ -189,6 +187,8 @@ else:
                     with st.expander("Berikut ini adalah data dari hasil normalisasi (proses mengubah nilai-nilai data ke skala yang sama)", expanded=True):
                         show_data(st.session_state.df_normalized)
                     
+                    numeric_cols = df.select_dtypes(include=[np.number]).columns.tolist()
+                    info_cols = [col for col in df.columns if col not in numeric_cols]
                     st.markdown("### Konfigurasi Clustering")
                     selected_columns = st.multiselect(
                             "Pilih kolom numerik untuk clustering",
