@@ -559,7 +559,7 @@ else:
                     penjelasan = "Cluster cukup baik, namun ada sedikit tumpang tindih."
                 elif silhouette_avg > 0.25:
                     struktur_avg = "Weak Structure"
-                    penjelasan = "Cluster lemah, banyak data yang saling tumpang tindih."
+                    penjelasan = "Struktur Lemah."
                 else:
                     struktur_avg = "No Structure"
                     penjelasan = "Tidak ada struktur cluster yang jelas."
@@ -599,3 +599,4 @@ else:
     "<p style='text-align:center; font-size: 14px;'>© 2025 Puskesmas Tanah Sareal</p>",
     unsafe_allow_html=True
 )
+
