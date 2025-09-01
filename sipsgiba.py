@@ -398,6 +398,7 @@ else:
 
                 # Scatter plot cluster 1
                 st.subheader("Visualisasi Cluster 1 (C1)")
+                df_c1_filtered = df_pca_filtered[df_pca_filtered['Cluster'] == '1']
                 fig_c1 = px.scatter(
                     df_pca_filtered, x='Dim1', y='Dim2',
                     hover_name='Nama_Posyandu', title='Cluster 1 (C1) PCA Scatter Plot',
@@ -413,6 +414,7 @@ else:
 
                 # Scatter plot cluster 2
                 st.subheader("Visualisasi Cluster 2 (C2)")
+                df_c2_filtered = df_pca_filtered[df_pca_filtered['Cluster'] == '2']
                 fig_c2 = px.scatter(
                     df_pca_filtered, x='Dim1', y='Dim2',
                     hover_name='Nama_Posyandu', title='Cluster 2 (C2) PCA Scatter Plot',
