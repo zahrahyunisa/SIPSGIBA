@@ -400,7 +400,7 @@ else:
                 st.subheader("Visualisasi Cluster 1 (C1)")
                 fig_c1 = px.scatter(
                     df_pca_filtered, x='Dim1', y='Dim2',
-                    hover_name='Posyandu', title='Cluster 1 (C1) PCA Scatter Plot',
+                    hover_name='Nama_Posyandu', title='Cluster 1 (C1) PCA Scatter Plot',
                     color_discrete_sequence=['#43AA8B']
                 )
                 fig_c1.update_traces(marker=dict(size=12, line=dict(width=0.5, color='black')))
@@ -415,7 +415,7 @@ else:
                 st.subheader("Visualisasi Cluster 2 (C2)")
                 fig_c2 = px.scatter(
                     df_pca_filtered, x='Dim1', y='Dim2',
-                    hover_name='Posyandu', title='Cluster 2 (C2) PCA Scatter Plot',
+                    hover_name='Nama_Posyandu', title='Cluster 2 (C2) PCA Scatter Plot',
                     color_discrete_sequence=['#F9C74F']
                 )
                 fig_c2.update_traces(marker=dict(size=12, line=dict(width=0.5, color='black')))
