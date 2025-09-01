@@ -352,9 +352,10 @@ else:
                 # Gabungkan PCA dan cluster ke dataframe
                 df_pca = pd.DataFrame(data=X_pca, columns=['Dim1', 'Dim2'])
                 df_pca['Cluster'] = df_clustered['Cluster']
-                df_pca['Posyandu'] = df_clustered['Posyandu'] if 'Posyandu' in df_clustered.columns else "Tidak diketahui"
                 df_pca['Cluster'] = df_pca['Cluster'].astype(str)
+                df_pca['Posyandu'] = df_clustered['Posyandu'] if 'Posyandu' in df_clustered.columns else "Tidak diketahui"
                 df_pca['Nama'] = df_clustered['Nama'] if 'Nama' in df_clustered.columns else "Tidak diketahui"
+                df_pca["Nama_Posyandu"] = df_pca["Nama"].astype(str) + "<br>" + df_pca["Posyandu"].astype(str)
                 
                 # Visualisasi utama menggunakan plotly
                 custom_color_map = {'1': '#43AA8B', '2': '#F9C74F'}
@@ -368,6 +369,7 @@ else:
                     symbol_map=custom_symbol_map
                 )
                 fig.update_traces(marker=dict(size=12, line=dict(width=0.5, color='black')))
+                hovertemplate='%{customdata[0]}<br>%{customdata[1]}<extra></extra>'
                 fig.update_layout(
                     xaxis_title=f"Dim1 ({pca.explained_variance_ratio_[0]*100:.1f}%)",
                     yaxis_title=f"Dim2 ({pca.explained_variance_ratio_[1]*100:.1f}%)",
