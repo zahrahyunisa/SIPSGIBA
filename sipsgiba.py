@@ -362,8 +362,7 @@ else:
                 fig = px.scatter(
                     df_pca, x="Dim1", y="Dim2",
                     color="Cluster", symbol="Cluster",
-                    hover_name="Nama",
-                    hover_data=["Posyandu"],
+                    hover_name="Nama_Posyandu",
                     title="Visualisasi Clustering menggunakan PCA",
                     color_discrete_map=custom_color_map,
                     symbol_map=custom_symbol_map
@@ -584,7 +583,7 @@ else:
             st.session_state.selected_columns and
             st.session_state.selected_data
     ):
-
+                
                 st.warning("Silahkan unggah file terlebih dahulu di menu **Unggah File**.")
                 st.markdown("<hr style='margin-top:50px; margin-bottom:10px;'>", unsafe_allow_html=True)
 
