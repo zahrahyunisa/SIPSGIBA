@@ -162,11 +162,11 @@ else:
                 with st.expander("Berikut ini adalah data dari hasil file yang telah diunggah", expanded=True):
                     show_data(df)
                     
-                numeric_cols = df.select_dtypes(include=np.number).columns.tolist()
+                all_cols = df.columns.tolist()
                 exclude_cols = ["no", "nomor", "id"]
-                numeric_cols = [col for col in numeric_cols if col.lower() not in exclude_cols]
+                all_cols = [col for col in all_cols if col.lower() not in exclude_cols]
 
-                if not numeric_cols:
+                if not all_cols:
                     st.error("File CSV tidak mengandung kolom numerik.")
                 else:
                     # Normalisasi data menggunakan decimal scaling
@@ -181,7 +181,7 @@ else:
                             df_normalized[col] = (df_normalized[col] / max_value).round(2)
 
                         st.session_state.df_normalized = df_normalized
-                        st.session_state.selected_columns = numeric_cols
+                        st.session_state.selected_columns = all_cols
                     
                     st.markdown("### Data Normalisasi")
                     with st.expander("Berikut ini adalah data dari hasil normalisasi (proses mengubah nilai-nilai data ke skala yang sama)", expanded=True):
@@ -190,7 +190,7 @@ else:
                     st.markdown("### Konfigurasi Clustering")
                     selected_columns = st.multiselect(
                             "Pilih kolom numerik untuk clustering",
-                            numeric_cols,
+                            all_cols,
                             placeholder="Silahkan pilih variabel untuk melanjutkan",
                             key="cols_selector"
                         )
@@ -238,7 +238,7 @@ else:
                                     format_func=lambda x: f"Baris {x}",
                                     key=f"centroid_{i}"
                                 )
-                                
+
                                 selected_values = df_normalized.loc[row_idx, selected_columns].values
                                 st.write(dict(zip(selected_columns, selected_values)))
                                 selected_data.append(selected_values)
@@ -588,5 +588,4 @@ else:
     st.markdown(
     "<p style='text-align:center; font-size: 14px;'>© 2025 Puskesmas Tanah Sareal</p>",
     unsafe_allow_html=True
-
 )
