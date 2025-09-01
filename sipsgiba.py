@@ -165,6 +165,8 @@ else:
                 all_cols = df.columns.tolist()
                 exclude_cols = ["no", "nomor", "id"]
                 all_cols = [col for col in all_cols if col.lower() not in exclude_cols]
+                numeric_cols = df.select_dtypes(include=[np.number]).columns.tolist()
+                info_cols = [col for col in df.columns if col not in numeric_cols]
 
                 if not all_cols:
                     st.error("File CSV tidak mengandung kolom numerik.")
@@ -190,7 +192,7 @@ else:
                     st.markdown("### Konfigurasi Clustering")
                     selected_columns = st.multiselect(
                             "Pilih kolom numerik untuk clustering",
-                            all_cols,
+                            numeric_cols,
                             placeholder="Silahkan pilih variabel untuk melanjutkan",
                             key="cols_selector"
                         )
